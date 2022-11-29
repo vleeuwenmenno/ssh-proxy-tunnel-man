@@ -32,11 +32,10 @@ if [ "$ACTION" == "howto" ]; then
 fi
 
 if [ "$ACTION" == "ps" ]; then
-    echo "| LAUNCH TIME   | HOST"
     if [ "$(ps aux | grep -w 'ssh -f -N -M -S' | grep -v 'grep')" == "" ]; then
         echo 'No SSH proxy tunnels currently opened.'
     else
-        ps aux | grep -w 'ssh -f -N -M -S' | grep -v 'grep' | awk '{print "| "$9"        | " $19}'
+        ps aux | grep -w 'ssh -f -N -M -S' | grep -v 'grep' | awk '{print $9" "$19" "$16}' | column -t
     fi
     exit 1
 fi
